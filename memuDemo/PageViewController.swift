@@ -18,7 +18,7 @@ class PageViewController: UIViewController {
         if revealViewController() != nil {
             //            revealViewController().rearViewRevealWidth = 62
             btnMenuButton.target = revealViewController()
-            btnMenuButton.action = "revealToggle:"
+            btnMenuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         }
     }
     override func didReceiveMemoryWarning() {

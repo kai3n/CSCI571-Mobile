@@ -10,10 +10,16 @@ import UIKit
 
 class FavoriteEventViewController: UIViewController {
 
+    @IBOutlet weak var btnMenuButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        if revealViewController() != nil {
+            //            revealViewController().rearViewRevealWidth = 62
+            btnMenuButton.target = revealViewController()
+            btnMenuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        }
     }
 
     override func didReceiveMemoryWarning() {

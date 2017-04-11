@@ -17,8 +17,8 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var iconArray:Array = [UIImage]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        ManuNameArray = ["Home","Message","Map","Setting"]
-        iconArray = [UIImage(named:"home")!,UIImage(named:"message")!,UIImage(named:"map")!,UIImage(named:"setting")!]
+        ManuNameArray = ["Home","Favorites","Detail"]
+        iconArray = [UIImage(named:"home")!,UIImage(named:"favorites")!,UIImage(named:"detail")!]
         
         imgProfile.layer.borderWidth = 2
         imgProfile.layer.borderColor = UIColor.green.cgColor
@@ -48,33 +48,39 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let revealviewcontroller:SWRevealViewController = self.revealViewController()
+        let revealviewcontroller = self.revealViewController()
         
         let cell:MenuCell = tableView.cellForRow(at: indexPath) as! MenuCell
         print(cell.lblMenuname.text!)
         if cell.lblMenuname.text! == "Home"
         {
             print("Home Tapped")
+            
             let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
             let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
             
-            revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
+            revealviewcontroller?.pushFrontViewController(newFrontController, animated: true)
             
         }
-        if cell.lblMenuname.text! == "Message"
+        if cell.lblMenuname.text! == "Favorites"
         {
-            print("message Tapped")
-           
-            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
-            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-            
-            revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
+            print("favorites Tapped")
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController3")
+            self.present(resultViewController, animated:false, completion:nil)
+//            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController3") as! SWRevealViewController
+//            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
+//            
+//            revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
         }
-        if cell.lblMenuname.text! == "Map"
+        if cell.lblMenuname.text! == "Detail"
         {
-            print("Map Tapped")
+            print("Detail Tapped")
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "DetailController")
+            self.present(resultViewController, animated:false, completion:nil)
         }
         if cell.lblMenuname.text! == "Setting"
         {
