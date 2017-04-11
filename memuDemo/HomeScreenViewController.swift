@@ -15,7 +15,7 @@ class HomeScreenViewController: UIViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
         self.present(resultViewController, animated:false, completion:nil)
-    }
+    } 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
