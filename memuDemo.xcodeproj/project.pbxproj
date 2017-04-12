@@ -17,6 +17,7 @@
 		B222F21A1DAA354D0089573D /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B222F2191DAA354D0089573D /* menuViewController.swift */; };
 		B222F21C1DAA36070089573D /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B222F21B1DAA36070089573D /* MenuCell.swift */; };
 		B222F21E1DAA46600089573D /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B222F21D1DAA46600089573D /* MessageViewController.swift */; };
+		F80B602A1E9D968E009402F5 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60291E9D968E009402F5 /* GlobalData.swift */; };
 		F89B144E1E9C931400BC67C6 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144D1E9C931400BC67C6 /* UserViewController.swift */; };
 		F89B14501E9C932400BC67C6 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144F1E9C932400BC67C6 /* PageViewController.swift */; };
 		F89B14521E9C932D00BC67C6 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B14511E9C932D00BC67C6 /* EventViewController.swift */; };
@@ -67,6 +68,7 @@
 		B222F21D1DAA46600089573D /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		D3BFCFED623D34F3AB089AAA /* Pods-memuDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memuDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-memuDemo/Pods-memuDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		E0CCAC047ABE0153921E7395 /* Pods_memuDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memuDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F80B60291E9D968E009402F5 /* GlobalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		F89B144D1E9C931400BC67C6 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F89B144F1E9C932400BC67C6 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F89B14511E9C932D00BC67C6 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				F89B14511E9C932D00BC67C6 /* EventViewController.swift */,
 				F89B14551E9C933E00BC67C6 /* GroupViewController.swift */,
 				F89B14531E9C933700BC67C6 /* PlaceViewController.swift */,
+				F80B60291E9D968E009402F5 /* GlobalData.swift */,
 				F89B14671E9CB1C400BC67C6 /* FavoriteGroupViewController.swift */,
 				F89B14691E9CB21700BC67C6 /* DetailAlbumViewController.swift */,
 				F89B146B1E9CB22100BC67C6 /* DetailPostViewController.swift */,
@@ -376,6 +379,7 @@
 				B222F21E1DAA46600089573D /* MessageViewController.swift in Sources */,
 				B222F21A1DAA354D0089573D /* menuViewController.swift in Sources */,
 				F89B14661E9CB1BC00BC67C6 /* FavoritePlaceViewController.swift in Sources */,
+				F80B602A1E9D968E009402F5 /* GlobalData.swift in Sources */,
 				F89B14541E9C933700BC67C6 /* PlaceViewController.swift in Sources */,
 				F89B14501E9C932400BC67C6 /* PageViewController.swift in Sources */,
 				F89B146A1E9CB21700BC67C6 /* DetailAlbumViewController.swift in Sources */,

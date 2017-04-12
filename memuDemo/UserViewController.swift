@@ -7,12 +7,30 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import SwiftSpinner
 
 class UserViewController: UIViewController {
 
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
+    var url = "http://csci571-hw8-163622.appspot.com/?keyword="
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        url += searchFieldGL + "&type=user"
+        print(url)
+        
+        SwiftSpinner.show("Loading Data...")
+        //sidebarMenuOpen = false
+        Alamofire.request(url)
+            .responseJSON{ response in debugPrint(response)
+                if let json = response.result.value {
+                    print("JSON: \(json)")
+                    SwiftSpinner.hide()
+                }
+        }
         
         // Do any additional setup after loading the view.
         if revealViewController() != nil {
@@ -20,6 +38,7 @@ class UserViewController: UIViewController {
             btnMenuButton.target = revealViewController()
             btnMenuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         }
+    
     }
 
     override func didReceiveMemoryWarning() {

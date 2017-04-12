@@ -37,7 +37,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="6d2-dK-kgP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vyg-84-KKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="aby-j9-QaM" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="NQ9-Ts-fNh"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="2IM-9o-17v">
@@ -53,6 +52,7 @@
                         <segue destination="8D7-nx-bec" kind="relationship" relationship="viewControllers" id="gdj-Lf-c24"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vyg-84-KKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1006" y="1541"/>
         </scene>
@@ -173,6 +173,9 @@
                                     <constraint firstAttribute="width" constant="47" id="Hsd-Q3-Zcf"/>
                                 </constraints>
                                 <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="text:" destination="w4s-Em-FhA" eventType="touchUpInside" id="Mmw-rC-GQS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,6 +194,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenuButton" destination="0FO-1o-je7" id="PR7-oS-fnL"/>
+                        <outlet property="searchField" destination="Kog-Y1-Wtq" id="HgE-D9-YWt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAs-FJ-C93" userLabel="First Responder" sceneMemberID="firstResponder"/>
