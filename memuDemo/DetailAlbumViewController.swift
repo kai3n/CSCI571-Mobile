@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import SwiftSpinner
 
 let cellID = "cell"
 
@@ -14,12 +17,49 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
     var selectedIndexPath : IndexPath?
 
     @IBOutlet weak var tblTableView: UITableView!
+    
+    var detailAlbumIdArray = [String]()
+    var detailPhotoTitleNameArray = [String]()
+    var detailAlbumUrlArray = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //test.text = detailIdGL
+        detailAlbumIdArray = [String]()
+        detailPhotoTitleNameArray = [String]()
+        detailAlbumUrlArray = [String]()
         tblTableView.register(UITableViewCell.self, forCellReuseIdentifier: "DetailAlbumCell")
         
+        let tmpId = "134972803193847"
+        //let detailUrl = url + "id=\(detailIdGL)"
+        let detailUrl = url + "id=\(tmpId)"
+        print(detailUrl)
         
+        SwiftSpinner.show("Loading Data...")
+        Alamofire.request(detailUrl)
+            .responseJSON{ response in
+                if let json = response.result.value {
+                    
+                    let swiftyJsonVar = JSON(json)
+                    for (_, subJson): (String, JSON) in swiftyJsonVar["albums"]["data"]{
+                        //detailPhotoTitleNameArray.append(String(subJson["name"].description as!)!);)
+                        self.detailPhotoTitleNameArray.append(subJson["name"].description)
+                        for (_, subJson2): (String, JSON) in subJson["photos"]["data"]{
+                            self.detailAlbumUrlArray.append(subJson2["picture"].description)
+                            self.detailAlbumIdArray.append(subJson2["id"].description)
+                            //print(subJson2["id"]) // for original picture
+                        }
+                        
+                        //print(subJson["name"]) // photo title
+                    }
+                    print(self.detailPhotoTitleNameArray)
+                    print(self.detailAlbumUrlArray)
+                    print(self.detailAlbumIdArray)
+
+                }
+                self.tblTableView.reloadData()
+                SwiftSpinner.hide()
+        }
         
         
         
@@ -48,13 +88,15 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(2)
-        return 2
+        return detailPhotoTitleNameArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(3)
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailAlbumCell
-        cell.title.text = "Text title"
+        cell.title.text = detailPhotoTitleNameArray[indexPath.row]
+        cell.photo1.downloadedFrom(link: detailAlbumUrlArray[indexPath.row*2])
+        cell.photo2.downloadedFrom(link: detailAlbumUrlArray[indexPath.row*2+1])
         return cell
     }
     

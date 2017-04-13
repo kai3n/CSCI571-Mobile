@@ -22,6 +22,7 @@
 		F80B60321E9E306D009402F5 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60311E9E306D009402F5 /* WebService.swift */; };
 		F80B60361E9EDFC5009402F5 /* DetailTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60351E9EDFC5009402F5 /* DetailTabController.swift */; };
 		F80B603A1E9F15D4009402F5 /* DetailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */; };
+		F80B603C1E9F4764009402F5 /* DetailPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B603B1E9F4763009402F5 /* DetailPostCell.swift */; };
 		F89B144E1E9C931400BC67C6 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144D1E9C931400BC67C6 /* UserViewController.swift */; };
 		F89B14501E9C932400BC67C6 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144F1E9C932400BC67C6 /* PageViewController.swift */; };
 		F89B14521E9C932D00BC67C6 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B14511E9C932D00BC67C6 /* EventViewController.swift */; };
@@ -77,6 +78,7 @@
 		F80B60311E9E306D009402F5 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		F80B60351E9EDFC5009402F5 /* DetailTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTabController.swift; sourceTree = "<group>"; };
 		F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAlbumCell.swift; sourceTree = "<group>"; };
+		F80B603B1E9F4763009402F5 /* DetailPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPostCell.swift; sourceTree = "<group>"; };
 		F89B144D1E9C931400BC67C6 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F89B144F1E9C932400BC67C6 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F89B14511E9C932D00BC67C6 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				F89B14671E9CB1C400BC67C6 /* FavoriteGroupViewController.swift */,
 				F89B14691E9CB21700BC67C6 /* DetailAlbumViewController.swift */,
 				F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */,
+				F80B603B1E9F4763009402F5 /* DetailPostCell.swift */,
 				F89B146B1E9CB22100BC67C6 /* DetailPostViewController.swift */,
 				F89B14651E9CB1BC00BC67C6 /* FavoritePlaceViewController.swift */,
 				F89B14631E9CB1B300BC67C6 /* FavoriteEventViewController.swift */,
@@ -376,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F80B603C1E9F4764009402F5 /* DetailPostCell.swift in Sources */,
 				F89B144E1E9C931400BC67C6 /* UserViewController.swift in Sources */,
 				B222F1EA1DAA30330089573D /* HomeScreenViewController.swift in Sources */,
 				F89B14601E9CB19F00BC67C6 /* FavoriteUserViewController.swift in Sources */,

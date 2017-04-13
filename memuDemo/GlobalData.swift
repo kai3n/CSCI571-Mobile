@@ -9,5 +9,6 @@
 import Foundation
 
 let globalData = ["a","b","c","d","e"]
+let url = "http://csci571-hw8-163622.appspot.com/fb?"
 var searchFieldGL = "a"
 var detailIdGL = ""

@@ -137,7 +137,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
-    var url = "http://csci571-hw8-163622.appspot.com/fb?keyword="
     var userIdArray = [String]()
     var userNameArray = [String]()
     var userUrlArray = [String]()
@@ -151,7 +150,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = false
-        let searchUrl = url + searchFieldGL + "&type=user&offset=" + "\(offSet)"
+        let searchUrl = url + "keyword=" + searchFieldGL + "&type=user&offset=" + "\(offSet)"
         print(searchUrl)
         SwiftSpinner.show("Loading Data...")
         Alamofire.request(searchUrl)

@@ -8,10 +8,14 @@
 
 import UIKit
 
+
+
 class DetailAlbumCell : UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBOutlet weak var photo1: UIImageView!
+    @IBOutlet weak var photo2: UIImageView!
     var frameAdded = false
     
     override func awakeFromNib() {
@@ -24,11 +28,12 @@ class DetailAlbumCell : UITableViewCell {
         
         // Configure the view for the selected state
     }
-    class var expandedHeight: CGFloat { get { return 200 } }
+    class var expandedHeight: CGFloat { get { return 350 } }
     class var defaultHeight: CGFloat { get { return 44 } }
     
     func checkHeight() {
-        datePicker.isHidden = (frame.size.height < DetailAlbumCell.expandedHeight)
+        photo1.isHidden = (frame.size.height < DetailAlbumCell.expandedHeight)
+        photo2.isHidden = (frame.size.height < DetailAlbumCell.expandedHeight)
     }
     
     func watchFrameChanges() {
