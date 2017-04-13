@@ -18,6 +18,10 @@
 		B222F21C1DAA36070089573D /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B222F21B1DAA36070089573D /* MenuCell.swift */; };
 		B222F21E1DAA46600089573D /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B222F21D1DAA46600089573D /* MessageViewController.swift */; };
 		F80B602A1E9D968E009402F5 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60291E9D968E009402F5 /* GlobalData.swift */; };
+		F80B602E1E9DBCC8009402F5 /* userCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B602D1E9DBCC8009402F5 /* userCell.swift */; };
+		F80B60321E9E306D009402F5 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60311E9E306D009402F5 /* WebService.swift */; };
+		F80B60361E9EDFC5009402F5 /* DetailTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60351E9EDFC5009402F5 /* DetailTabController.swift */; };
+		F80B603A1E9F15D4009402F5 /* DetailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */; };
 		F89B144E1E9C931400BC67C6 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144D1E9C931400BC67C6 /* UserViewController.swift */; };
 		F89B14501E9C932400BC67C6 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144F1E9C932400BC67C6 /* PageViewController.swift */; };
 		F89B14521E9C932D00BC67C6 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B14511E9C932D00BC67C6 /* EventViewController.swift */; };
@@ -69,6 +73,10 @@
 		D3BFCFED623D34F3AB089AAA /* Pods-memuDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memuDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-memuDemo/Pods-memuDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		E0CCAC047ABE0153921E7395 /* Pods_memuDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memuDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80B60291E9D968E009402F5 /* GlobalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
+		F80B602D1E9DBCC8009402F5 /* userCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userCell.swift; sourceTree = "<group>"; };
+		F80B60311E9E306D009402F5 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		F80B60351E9EDFC5009402F5 /* DetailTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTabController.swift; sourceTree = "<group>"; };
+		F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAlbumCell.swift; sourceTree = "<group>"; };
 		F89B144D1E9C931400BC67C6 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F89B144F1E9C932400BC67C6 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F89B14511E9C932D00BC67C6 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -150,11 +158,15 @@
 				F80B60291E9D968E009402F5 /* GlobalData.swift */,
 				F89B14671E9CB1C400BC67C6 /* FavoriteGroupViewController.swift */,
 				F89B14691E9CB21700BC67C6 /* DetailAlbumViewController.swift */,
+				F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */,
 				F89B146B1E9CB22100BC67C6 /* DetailPostViewController.swift */,
 				F89B14651E9CB1BC00BC67C6 /* FavoritePlaceViewController.swift */,
 				F89B14631E9CB1B300BC67C6 /* FavoriteEventViewController.swift */,
+				F80B60351E9EDFC5009402F5 /* DetailTabController.swift */,
 				F89B14611E9CB1AA00BC67C6 /* FavoritePageViewController.swift */,
+				F80B602D1E9DBCC8009402F5 /* userCell.swift */,
 				F89B144D1E9C931400BC67C6 /* UserViewController.swift */,
+				F80B60311E9E306D009402F5 /* WebService.swift */,
 				F89B145F1E9CB19F00BC67C6 /* FavoriteUserViewController.swift */,
 				B222F2171DAA33DA0089573D /* SWRevealViewController.m */,
 				B222F1EB1DAA30330089573D /* Main.storyboard */,
@@ -370,17 +382,21 @@
 				F89B14641E9CB1B300BC67C6 /* FavoriteEventViewController.swift in Sources */,
 				B222F21C1DAA36070089573D /* MenuCell.swift in Sources */,
 				F89B146C1E9CB22100BC67C6 /* DetailPostViewController.swift in Sources */,
+				F80B60361E9EDFC5009402F5 /* DetailTabController.swift in Sources */,
 				F89B14561E9C933E00BC67C6 /* GroupViewController.swift in Sources */,
 				B222F1E81DAA30330089573D /* AppDelegate.swift in Sources */,
 				B222F2181DAA33DA0089573D /* SWRevealViewController.m in Sources */,
+				F80B60321E9E306D009402F5 /* WebService.swift in Sources */,
 				F89B14681E9CB1C400BC67C6 /* FavoriteGroupViewController.swift in Sources */,
 				F89B14621E9CB1AA00BC67C6 /* FavoritePageViewController.swift in Sources */,
 				F89B14521E9C932D00BC67C6 /* EventViewController.swift in Sources */,
+				F80B602E1E9DBCC8009402F5 /* userCell.swift in Sources */,
 				B222F21E1DAA46600089573D /* MessageViewController.swift in Sources */,
 				B222F21A1DAA354D0089573D /* menuViewController.swift in Sources */,
 				F89B14661E9CB1BC00BC67C6 /* FavoritePlaceViewController.swift in Sources */,
 				F80B602A1E9D968E009402F5 /* GlobalData.swift in Sources */,
 				F89B14541E9C933700BC67C6 /* PlaceViewController.swift in Sources */,
+				F80B603A1E9F15D4009402F5 /* DetailAlbumCell.swift in Sources */,
 				F89B14501E9C932400BC67C6 /* PageViewController.swift in Sources */,
 				F89B146A1E9CB21700BC67C6 /* DetailAlbumViewController.swift in Sources */,
 			);

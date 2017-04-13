@@ -11,21 +11,21 @@ import UIKit
 class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var tblTableView: UITableView!
-    @IBOutlet weak var imgProfile: UIImageView!
     
-    var ManuNameArray:Array = [String]()
-    var iconArray:Array = [UIImage]()
+    var appNameArray:Array = [String]()
+    var appIconArray:Array = [UIImage]()
+    var manuNameArray:Array = [String]()
+    var manuIconArray:Array = [UIImage]()
+    var myNameArray:Array = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        ManuNameArray = ["Home","Favorites","Detail"]
-        iconArray = [UIImage(named:"home")!,UIImage(named:"favorites")!,UIImage(named:"detail")!]
+        appNameArray = ["FB Search"]
+        appIconArray = [UIImage(named:"fb")!]
+        manuNameArray = ["Home","Favorites"]
+        manuIconArray = [UIImage(named:"home")!,UIImage(named:"favorite")!]
+        myNameArray = ["About me"]
         
-        imgProfile.layer.borderWidth = 2
-        imgProfile.layer.borderColor = UIColor.green.cgColor
-        imgProfile.layer.cornerRadius = 50
-        
-        imgProfile.layer.masksToBounds = false
-        imgProfile.clipsToBounds = true 
         // Do any additional setup after loading the view.
     }
 
@@ -34,14 +34,32 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Dispose of any resources that can be recreated.
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ManuNameArray.count
+        if section == 0 {
+            return appNameArray.count
+        }
+        if section == 1 {
+            return manuNameArray.count
+        }
+        else {
+            return myNameArray.count
+        }
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuCell
-        
-        cell.lblMenuname.text! = ManuNameArray[indexPath.row]
-        cell.imgIcon.image = iconArray[indexPath.row]
+        if indexPath.section == 0 {
+            cell.lblMenuname.text! = appNameArray[indexPath.row]
+            cell.imgIcon.image = appIconArray[indexPath.row]
+        }
+        if indexPath.section == 1 {
+            
+            cell.lblMenuname.text! = manuNameArray[indexPath.row]
+            cell.imgIcon.image = manuIconArray[indexPath.row]
+        }
+        if indexPath.section == 2 {
+            cell.lblMenuname.text! = myNameArray[indexPath.row]
+            //cell.imgIcon.image = appIconArray[indexPath.row]
+        }
         
         return cell
     }
@@ -66,14 +84,14 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if cell.lblMenuname.text! == "Favorites"
         {
             print("favorites Tapped")
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController3")
-            self.present(resultViewController, animated:false, completion:nil)
-//            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController3") as! SWRevealViewController
-//            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-//            
-//            revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController3")
+//            self.present(resultViewController, animated:false, completion:nil)
+            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController3") as! SWRevealViewController
+            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
+            
+            revealviewcontroller?.pushFrontViewController(newFrontController, animated: true)
         }
         if cell.lblMenuname.text! == "Detail"
         {
@@ -87,6 +105,71 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
            print("setting Tapped")
         }
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if section == 1 {
+            return "MENU"
+        }
+        else if section == 2 {
+            return "OTHERS"
+        }
+        else {
+            return ""
+        }
+    }
+    
+    
+    
+    /*
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! userCell
+     
+     
+     if indexPath.section == 0 {
+     cell.label.text = data[indexPath.row]
+     }
+     else {
+     cell.label.text = data1[indexPath.row]
+     }
+     return cell
+     
+     
+     }
+     
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     
+     if section == 0 {
+     return data.count
+     }
+     return data1.count
+     
+     }
+     
+     func numberOfSections(in tableView: UITableView) -> Int {
+     return 2
+     }
+     
+     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+     if section == 0 {
+     return "Data 0"
+     }
+     return "Data 1"
+     }
+     
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     print("selected \(indexPath.section) section \(indexPath.row) row")
+     }
+     
+    */
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 

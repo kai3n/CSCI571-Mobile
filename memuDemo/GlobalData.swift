@@ -10,3 +10,4 @@ import Foundation
 
 let globalData = ["a","b","c","d","e"]
 var searchFieldGL = "a"
+var detailIdGL = ""
