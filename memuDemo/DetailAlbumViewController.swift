@@ -45,6 +45,8 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
         detailPhotoTitleNameArray = [String]()
         detailAlbumUrlArray = [String]()
         tblTableView.register(UITableViewCell.self, forCellReuseIdentifier: "DetailAlbumCell")
+        
+
 
         
 

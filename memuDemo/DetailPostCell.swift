@@ -20,7 +20,7 @@ class DetailPostCell : UITableViewCell {
     
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var postTime: UILabel!
-    @IBOutlet weak var content: UITextView!
+    @IBOutlet weak var postContent: UILabel!
     var frameAdded = false
     
     override func awakeFromNib() {

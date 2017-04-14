@@ -24,7 +24,7 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
         detailProfileUrl = "" // todo: store id
         detailContentArray = [String]()
         detailTimeArray = [String]()
-        
+        tblTableView.estimatedRowHeight = 200.0
         
         
         let tmpId = "134972803193847"
@@ -91,8 +91,10 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
         print(3)
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! DetailPostCell
         cell.profilePicture.downloadedFrom(link: self.detailProfileUrl)
-        cell.content.text = self.detailContentArray[indexPath.row]
+        cell.postContent.text = self.detailContentArray[indexPath.row]
+        cell.postContent.numberOfLines = 20
         cell.postTime.text = self.detailTimeArray[indexPath.row]
+        cell.updateConstraintsIfNeeded()
         return cell
     }
     
@@ -118,13 +120,13 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
 //        }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
+//
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
 
     /*
     // MARK: - Navigation
