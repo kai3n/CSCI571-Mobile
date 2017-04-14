@@ -21,6 +21,22 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
     var detailAlbumIdArray = [String]()
     var detailPhotoTitleNameArray = [String]()
     var detailAlbumUrlArray = [String]()
+    func add(){
+        print("add")
+    }
+//    func back(){
+//        print("back")
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
+//        self.present(resultViewController, animated:false, completion:nil)
+//    }
+    
+//    func tappedBackButton() {
+//        print(1)
+//        // Do your thing
+//        
+//        self.navigationController!.popViewController(animated: true)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +45,23 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
         detailPhotoTitleNameArray = [String]()
         detailAlbumUrlArray = [String]()
         tblTableView.register(UITableViewCell.self, forCellReuseIdentifier: "DetailAlbumCell")
+
+        
+
+        
+//        let optionBarButtonItem = UIBarButtonItem(image: UIImage(named:"options"), style: UIBarButtonItemStyle.plain, target:self, action: #selector(UserViewController.add))
+//        self.navigationItem.setRightBarButton(optionBarButtonItem, animated: true)
+        //self.navigationController?.navigationBar.backItem?.title = "zz"
+//        weak var weakSelf = self
+//        navigationItem.leftBarButtonItems = CustomBackButton.createWithText(text: "a", color: UIColor.blue, target: weakSelf, action: #selector(DetailAlbumViewController.tappedBackButton))
+
+//        let optionBarButtonItem = UIBarButtonItem(image: UIImage(named:"options"), style: UIBarButtonItemStyle.plain, target:self, action: #selector(DetailAlbumViewController.add))
+//        self.navigationItem.rightBarButtonItem = optionBarButtonItem
+        //self.navigationItem.hidesBackButton = true
+//        let backButton = UIBarButtonItem(image: UIImage(named:"back"),style: UIBarButtonItemStyle.plain, target:self, action: #selector(DetailAlbumViewController.back))
+//        self.navigationItem.leftBarButtonItem = backButton
+//        self.automaticallyAdjustsScrollViewInsets = true
+        self.navigationItem.title = "qqwqe"
         
         let tmpId = "134972803193847"
         //let detailUrl = url + "id=\(detailIdGL)"
@@ -61,20 +94,7 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
                 SwiftSpinner.hide()
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
-        
     }
 
     override func didReceiveMemoryWarning() {

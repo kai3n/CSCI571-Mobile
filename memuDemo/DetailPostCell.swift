@@ -10,10 +10,18 @@ import UIKit
 
 class DetailPostCell : UITableViewCell {
     
+    deinit {
+        if(frameAdded){
+            removeObserver(self, forKeyPath: "frame")
+            frameAdded = false
+        }
+        // perform the deinitialization
+    }
+    
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var content: UITextView!
-    
+    var frameAdded = false
     
     override func awakeFromNib() {
         super.awakeFromNib()

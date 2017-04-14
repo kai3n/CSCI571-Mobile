@@ -12,8 +12,14 @@ import UIKit
 
 class DetailAlbumCell : UITableViewCell {
     
+    deinit {
+        if(frameAdded){
+            removeObserver(self, forKeyPath: "frame")
+            frameAdded = false
+        }
+        // perform the deinitialization
+    }
     @IBOutlet weak var title: UILabel!
-    
     @IBOutlet weak var photo1: UIImageView!
     @IBOutlet weak var photo2: UIImageView!
     var frameAdded = false
@@ -54,6 +60,7 @@ class DetailAlbumCell : UITableViewCell {
         if keyPath == "frame" {
             checkHeight()
         }
+        
     }
 //
     

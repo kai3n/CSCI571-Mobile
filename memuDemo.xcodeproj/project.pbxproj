@@ -35,6 +35,8 @@
 		F89B14681E9CB1C400BC67C6 /* FavoriteGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B14671E9CB1C400BC67C6 /* FavoriteGroupViewController.swift */; };
 		F89B146A1E9CB21700BC67C6 /* DetailAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B14691E9CB21700BC67C6 /* DetailAlbumViewController.swift */; };
 		F89B146C1E9CB22100BC67C6 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B146B1E9CB22100BC67C6 /* DetailPostViewController.swift */; };
+		F8A075191EA08A1100210913 /* aboutMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A075181EA08A1100210913 /* aboutMeViewController.swift */; };
+		F8A0751B1EA0B70A00210913 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A0751A1EA0B70A00210913 /* CustomBackButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		F89B14671E9CB1C400BC67C6 /* FavoriteGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteGroupViewController.swift; sourceTree = "<group>"; };
 		F89B14691E9CB21700BC67C6 /* DetailAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAlbumViewController.swift; sourceTree = "<group>"; };
 		F89B146B1E9CB22100BC67C6 /* DetailPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
+		F8A075181EA08A1100210913 /* aboutMeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutMeViewController.swift; sourceTree = "<group>"; };
+		F8A0751A1EA0B70A00210913 /* CustomBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,11 +158,13 @@
 				B222F1E91DAA30330089573D /* HomeScreenViewController.swift */,
 				B222F2161DAA33DA0089573D /* SWRevealViewController.h */,
 				F89B144F1E9C932400BC67C6 /* PageViewController.swift */,
+				F8A075181EA08A1100210913 /* aboutMeViewController.swift */,
 				F89B14511E9C932D00BC67C6 /* EventViewController.swift */,
 				F89B14551E9C933E00BC67C6 /* GroupViewController.swift */,
 				F89B14531E9C933700BC67C6 /* PlaceViewController.swift */,
 				F80B60291E9D968E009402F5 /* GlobalData.swift */,
 				F89B14671E9CB1C400BC67C6 /* FavoriteGroupViewController.swift */,
+				F8A0751A1EA0B70A00210913 /* CustomBackButton.swift */,
 				F89B14691E9CB21700BC67C6 /* DetailAlbumViewController.swift */,
 				F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */,
 				F80B603B1E9F4763009402F5 /* DetailPostCell.swift */,
@@ -391,6 +397,7 @@
 				B222F1E81DAA30330089573D /* AppDelegate.swift in Sources */,
 				B222F2181DAA33DA0089573D /* SWRevealViewController.m in Sources */,
 				F80B60321E9E306D009402F5 /* WebService.swift in Sources */,
+				F8A075191EA08A1100210913 /* aboutMeViewController.swift in Sources */,
 				F89B14681E9CB1C400BC67C6 /* FavoriteGroupViewController.swift in Sources */,
 				F89B14621E9CB1AA00BC67C6 /* FavoritePageViewController.swift in Sources */,
 				F89B14521E9C932D00BC67C6 /* EventViewController.swift in Sources */,
@@ -402,6 +409,7 @@
 				F89B14541E9C933700BC67C6 /* PlaceViewController.swift in Sources */,
 				F80B603A1E9F15D4009402F5 /* DetailAlbumCell.swift in Sources */,
 				F89B14501E9C932400BC67C6 /* PageViewController.swift in Sources */,
+				F8A0751B1EA0B70A00210913 /* CustomBackButton.swift in Sources */,
 				F89B146A1E9CB21700BC67C6 /* DetailAlbumViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SwiftSpinner
-
+import EasyToast
 
 class HomeScreenViewController: UIViewController {
 
@@ -31,7 +31,7 @@ class HomeScreenViewController: UIViewController {
             self.present(resultViewController, animated:false, completion:nil)
         }
         else{
-            // validation check
+            self.view.showToast("Enter a valid query!", position: .bottom, popTime: 5, dismissOnTap: false)
         }
         
         

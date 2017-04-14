@@ -93,12 +93,13 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             revealviewcontroller?.pushFrontViewController(newFrontController, animated: true)
         }
-        if cell.lblMenuname.text! == "Detail"
+        if cell.lblMenuname.text! == "About me"
         {
-            print("Detail Tapped")
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "DetailController")
-            self.present(resultViewController, animated:false, completion:nil)
+            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "aboutMeViewController") as! aboutMeViewController
+            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
+            
+            revealviewcontroller?.pushFrontViewController(newFrontController, animated: true)
         }
         if cell.lblMenuname.text! == "Setting"
         {

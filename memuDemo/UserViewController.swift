@@ -11,14 +11,14 @@ import Alamofire
 import SwiftyJSON
 import SwiftSpinner
 
+
 class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
     @IBOutlet weak var tableView: UITableView!
-    
-    
+
     @IBAction func next(_ sender: Any) {
-        self.tabBarController?.tabBar.isHidden = false
+        
         if nextUrlAvailable {
             self.userIdArray = [String]()
             self.userNameArray = [String]()
@@ -27,13 +27,16 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.starIconArray = [UIImage]()
             
             self.offSet += 10
-            let searchUrl = url + searchFieldGL + "&type=user&offset=" + "\(offSet)"
+            let searchUrl = url + "keyword=" + searchFieldGL + "&type=user&offset=" + "\(offSet)"
+            currentUrlGL = searchUrl
             print(searchUrl)
+            print("p1")
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)
                 .responseJSON{ response in
                     if let json = response.result.value {
                         let swiftyJsonVar = JSON(json)
+                        print("p2")
                         if let resData = swiftyJsonVar["data"].arrayObject {
                             let userData = resData as! [[String:AnyObject]]
                             for item in userData{
@@ -59,6 +62,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             self.previousUrlAvailable = false
                         }
                     }
+                    print(self.userNameArray)
                     self.tableView.reloadData()
                     SwiftSpinner.hide()
             }
@@ -75,7 +79,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func previous(_ sender: Any) {
         
-        self.tabBarController?.tabBar.isHidden = false
+        
         if previousUrlAvailable {
             self.userIdArray = [String]()
             self.userNameArray = [String]()
@@ -87,7 +91,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if self.offSet < 0{
                 self.offSet = 0
             }
-            let searchUrl = url + searchFieldGL + "&type=user&offset=" + "\(offSet)"
+            let searchUrl = url + "keyword=" + searchFieldGL + "&type=user&offset=" + "\(offSet)"
+            currentUrlGL = searchUrl
             print(searchUrl)
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)
@@ -147,11 +152,30 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var previousUrlAvailable = Bool()
     var offSet = 0
     
+//    func back(){
+//        self.tabBarController?.tabBar.isHidden = false
+//    }
+//    func tappedBackButton() {
+//        print(1)
+//        // Do your thing
+//        
+//        self.navigationController!.popViewController(animated: true)
+//    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = false
+//        self.navigationItem.hidesBackButton = true
+//        let backButton = UIBarButtonItem(image: UIImage(named:"options"),style: UIBarButtonItemStyle.plain, target:self, action: #selector(UserViewController.back))
+//        self.navigationItem.leftBarButtonItem = backButton
+//        self.automaticallyAdjustsScrollViewInsets = true
+        
+        
         let searchUrl = url + "keyword=" + searchFieldGL + "&type=user&offset=" + "\(offSet)"
         print(searchUrl)
+        currentUrlGL = searchUrl
         SwiftSpinner.show("Loading Data...")
         Alamofire.request(searchUrl)
             .responseJSON{ response in
@@ -222,10 +246,23 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        currentRow = indexPath.row
 //        performSegue(withIdentifier: "DetailController", sender: indexPath.row)
         self.tabBarController?.tabBar.isHidden = true
+//        let userViewController = self.storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+//        self.navigationController?.pushViewController(userViewController, animated: true)
+//        
+        //self.navigationController?.navigationBar.isHidden = true
+//        let optionBarButtonItem = UIBarButtonItem(image: UIImage(named:"options"), style: UIBarButtonItemStyle.plain, target:self, action: #selector(UserViewController.add))
+        //self.navigationItem.backBarButtonItem?.title = "Results!"
+        
+//        self.navigationItem.setRightBarButton(optionBarButtonItem, animated: true)
+        //self.navigationItem.rightBarButtonItem = optionBarButtonItem
+        
         detailIdGL = userIdArray[indexPath.row]
         
+        
     }
-    
+    func add(){
+        print("add")
+    }
     
     
 //    override func willMove(toParentViewController parent: UIViewController?) {
