@@ -16,7 +16,65 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
     var detailProfileUrl:String = ""
     var detailContentArray = [String]()
     var detailTimeArray = [String]()
+    var favorite = false
     
+    @IBAction func pressedBackbtn(_ sender: Any) {
+        fromDetail = true
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
+        self.present(resultViewController, animated:false, completion:nil)
+    }
+    
+    @IBAction func showActionSheet(_ sender: Any) {
+        let dict:[String:String] = ["id":currentDetailIdGL,"name":currentUserNameGL,"url":currentUserProfileUrlGL]
+        
+        if ((defaults.object(forKey: currentDetailIdGL) as? [String:String]) != nil){
+            favorite = true
+        }
+        else{
+            favorite = false
+        }
+        
+        
+        let actionSheet = UIAlertController(title: "Image Source", message: "Choose camera or your photo library", preferredStyle: .actionSheet)
+        
+        if favorite{
+            let removeFavorite = UIAlertAction(title:"Remove to favorites", style: .default) { (action) in
+                self.view.showToast("remove Favorite", position: .bottom, popTime: 3, dismissOnTap: false)
+                defaults.removeObject(forKey: currentDetailIdGL)
+                defaults.synchronize()
+                print("false")
+                self.favorite = false
+            }
+            actionSheet.addAction(removeFavorite)
+        }
+        else{
+            let addFavorite = UIAlertAction(title:"Add to favorites", style: .default) { (action) in
+                self.view.showToast("add Favorite", position: .bottom, popTime: 3, dismissOnTap: false)
+                defaults.set(dict, forKey:currentDetailIdGL)
+                defaults.synchronize()
+                print("true")
+                self.favorite = true
+            }
+            actionSheet.addAction(addFavorite)
+        }
+        
+        
+        let share = UIAlertAction(title:"Share", style: .default) { (action) in
+            
+            print("share")
+            //
+            
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            print("cancel")
+        }
+        
+        actionSheet.addAction(share)
+        actionSheet.addAction(cancel)
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
     @IBOutlet weak var tblTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +82,13 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
         detailProfileUrl = "" // todo: store id
         detailContentArray = [String]()
         detailTimeArray = [String]()
-        tblTableView.estimatedRowHeight = 200.0
+        tblTableView.estimatedRowHeight = 100
+        tblTableView.rowHeight = UITableViewAutomaticDimension
         
         
         let tmpId = "134972803193847"
         //let detailUrl = url + "id=\(detailIdGL)"
-        let detailUrl = url + "id=\(tmpId)"
+        let detailUrl = url + "id=\(currentDetailIdGL)"
         print(detailUrl)
         
         SwiftSpinner.show("Loading Data...")
@@ -119,7 +178,7 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
 //            tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
 //        }
     }
-    
+//    
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return UITableViewAutomaticDimension
 //    }

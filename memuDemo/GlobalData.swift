@@ -10,6 +10,14 @@ import Foundation
 
 let globalData = ["a","b","c","d","e"]
 let url = "http://csci571-hw8-163622.appspot.com/fb?"
+var defaults = UserDefaults.standard
 var searchFieldGL = "a"
-var detailIdGL = ""
-var currentUrlGL = ""
+var currentDetailIdGL = ""
+var currentUserNameGL = ""
+var currentUserProfileUrlGL = ""
+var currentUrlGL = ["","","","",""]
+var tabBarIndexGL = 0
+var fromHome = true
+var fromDetail = false
+var latitude = ""
+var longitude = ""

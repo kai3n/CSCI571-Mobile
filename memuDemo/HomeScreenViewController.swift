@@ -10,9 +10,12 @@ import Alamofire
 import SwiftyJSON
 import SwiftSpinner
 import EasyToast
+import CoreLocation
 
-class HomeScreenViewController: UIViewController {
+class HomeScreenViewController: UIViewController, CLLocationManagerDelegate{
 
+    var locationManager: CLLocationManager!
+    
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
     @IBOutlet weak var searchField: UITextField!
     var url = "http://csci571-hw8-163622.appspot.com/?keyword="
@@ -24,7 +27,8 @@ class HomeScreenViewController: UIViewController {
         
         if searchField.text != ""{
             searchFieldGL = searchField.text!
-            
+            fromHome = true
+            tabBarIndexGL = 0
             // change the current view to the next view
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
@@ -38,6 +42,13 @@ class HomeScreenViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
         // Do any additional setup after loading the view, typically from a nib.
         if revealViewController() != nil {
             //            revealViewController().rearViewRevealWidth = 62
@@ -49,6 +60,12 @@ class HomeScreenViewController: UIViewController {
 //            extraButton.action = "rightRevealToggle:"
             
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let lastLocation: CLLocation = locations[locations.count - 1]
+        latitude = String(format: "%.6f", lastLocation.coordinate.latitude)
+        longitude = String(format: "%.6f", lastLocation.coordinate.longitude)
     }
     
     
