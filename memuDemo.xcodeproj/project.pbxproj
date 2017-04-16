@@ -23,6 +23,10 @@
 		F80B60361E9EDFC5009402F5 /* DetailTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60351E9EDFC5009402F5 /* DetailTabController.swift */; };
 		F80B603A1E9F15D4009402F5 /* DetailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */; };
 		F80B603C1E9F4764009402F5 /* DetailPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B603B1E9F4763009402F5 /* DetailPostCell.swift */; };
+		F86367611EA334CF0090EA8D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863675D1EA334CF0090EA8D /* Bolts.framework */; };
+		F86367621EA334CF0090EA8D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863675E1EA334CF0090EA8D /* FBSDKCoreKit.framework */; };
+		F86367631EA334CF0090EA8D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863675F1EA334CF0090EA8D /* FBSDKLoginKit.framework */; };
+		F86367641EA334CF0090EA8D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F86367601EA334CF0090EA8D /* FBSDKShareKit.framework */; };
 		F89B144E1E9C931400BC67C6 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144D1E9C931400BC67C6 /* UserViewController.swift */; };
 		F89B14501E9C932400BC67C6 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B144F1E9C932400BC67C6 /* PageViewController.swift */; };
 		F89B14521E9C932D00BC67C6 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B14511E9C932D00BC67C6 /* EventViewController.swift */; };
@@ -81,6 +85,10 @@
 		F80B60351E9EDFC5009402F5 /* DetailTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTabController.swift; sourceTree = "<group>"; };
 		F80B60391E9F15D4009402F5 /* DetailAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAlbumCell.swift; sourceTree = "<group>"; };
 		F80B603B1E9F4763009402F5 /* DetailPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPostCell.swift; sourceTree = "<group>"; };
+		F863675D1EA334CF0090EA8D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../FacebookSDKs-iOS-4.21.0/Bolts.framework"; sourceTree = "<group>"; };
+		F863675E1EA334CF0090EA8D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../FacebookSDKs-iOS-4.21.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		F863675F1EA334CF0090EA8D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../FacebookSDKs-iOS-4.21.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		F86367601EA334CF0090EA8D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../FacebookSDKs-iOS-4.21.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		F89B144D1E9C931400BC67C6 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F89B144F1E9C932400BC67C6 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F89B14511E9C932D00BC67C6 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +111,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA074E970912981894C8F91A /* Pods_memuDemo.framework in Frameworks */,
+				F86367621EA334CF0090EA8D /* FBSDKCoreKit.framework in Frameworks */,
+				F86367641EA334CF0090EA8D /* FBSDKShareKit.framework in Frameworks */,
+				F86367631EA334CF0090EA8D /* FBSDKLoginKit.framework in Frameworks */,
+				F86367611EA334CF0090EA8D /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +138,10 @@
 		62FAB2975F087777192E27EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F863675D1EA334CF0090EA8D /* Bolts.framework */,
+				F863675E1EA334CF0090EA8D /* FBSDKCoreKit.framework */,
+				F863675F1EA334CF0090EA8D /* FBSDKLoginKit.framework */,
+				F86367601EA334CF0090EA8D /* FBSDKShareKit.framework */,
 				E0CCAC047ABE0153921E7395 /* Pods_memuDemo.framework */,
 			);
 			name = Frameworks;
@@ -270,8 +286,9 @@
 				TargetAttributes = {
 					B222F1E31DAA30320089573D = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 8ZH933FUU5;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					B222F1F71DAA30330089573D = {
 						CreatedOnToolsVersion = 8.0;
@@ -566,10 +583,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8ZH933FUU5;
 				INFOPLIST_FILE = memuDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = parth.memuDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.memuDemo.csci571;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "memuDemo/memuDemo-Bridging-Header.h";
@@ -586,10 +603,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8ZH933FUU5;
 				INFOPLIST_FILE = memuDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = parth.memuDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.memuDemo.csci571;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "memuDemo/memuDemo-Bridging-Header.h";

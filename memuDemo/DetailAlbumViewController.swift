@@ -17,27 +17,44 @@ import FBSDKLoginKit
 
 
 
-class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableViewDataSource  {
+class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, FBSDKSharingDelegate  {
     var selectedIndexPath : IndexPath?
 
     @IBOutlet weak var tblTableView: UITableView!
     
-    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
-        let alert = UIAlertController(title: "Not Posted", message: error.description, preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(defaultAction)
-        
+    /**
+     Sent to the delegate when the share completes without error or cancellation.
+     - Parameter sharer: The FBSDKSharing that completed.
+     - Parameter results: The results from the sharer.  This may be nil or empty.
+     */
+    public func sharer(_ sharer: FBSDKSharing!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        print("success")
+        self.view.showToast("Shared!", position: .bottom, popTime: 2, dismissOnTap: false)
     }
     
-    func sharerDidCancel(_ sharer: FBSDKSharing!) {
+    
+    /**
+     Sent to the delegate when the sharer encounters an error.
+     - Parameter sharer: The FBSDKSharing that completed.
+     - Parameter error: The error.
+     */
+    public func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
+        print("Error")
+        self.view.showToast("Error!", position: .bottom, popTime: 2, dismissOnTap: false)
     }
     
-    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
-        let alert = UIAlertController(title: "Posted Successfully", message: "", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(defaultAction)
-        
+    
+    /**
+     Sent to the delegate when the sharer is cancelled.
+     - Parameter sharer: The FBSDKSharing that completed.
+     */
+    public func sharerDidCancel(_ sharer: FBSDKSharing) {
+        print("cancelled")
+        self.view.showToast("Cancelled!", position: .bottom, popTime: 2, dismissOnTap: false)
     }
+    
+    
+
     
     @IBAction func pressedBackbtn(_ sender: Any) {
         fromDetail = true
@@ -88,9 +105,25 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
         let share = UIAlertAction(title:"Share", style: .default) { (action) in
             
             print("share")
+            let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
             
-//            
+            content.contentURL = NSURL(string:"https://www.facebook.com/\(currentDetailIdGL)")! as URL
+            content.contentTitle = currentUserNameGL
+            content.contentDescription = "This is awesome!"
+            content.imageURL = NSURL(string: currentUserProfileUrlGL)! as URL
             
+            
+            let dialog : FBSDKShareDialog = FBSDKShareDialog()
+            dialog.fromViewController = self
+            dialog.shareContent = content
+            dialog.delegate = self as! FBSDKSharingDelegate
+            dialog.mode = FBSDKShareDialogMode.feedWeb
+            
+            if !dialog.canShow() {
+                dialog.mode = FBSDKShareDialogMode.automatic
+            }
+            dialog.show()
+
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             print("cancel")

@@ -31,12 +31,7 @@ class HomeScreenViewController: UIViewController, CLLocationManagerDelegate{
             isFavoriteTab = false
             tabBarIndexGL = 0
             // change the current view to the next view
-            
-            for v in defaults.dictionaryRepresentation().values {
-                if type(of: v) == _NSDictionary.Type.self{
-                    print(v)
-                }
-            }
+           
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
             self.present(resultViewController, animated:false, completion:nil)

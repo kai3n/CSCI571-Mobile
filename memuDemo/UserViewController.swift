@@ -13,6 +13,9 @@ import SwiftSpinner
 
 class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var favoriteUserIdArray = [String]()
+    var favoriteUserNameArray = [String]()
+    var favoriteUserUrlArray = [String]()
     var userIdArray = [String]()
     var userNameArray = [String]()
     var userUrlArray = [String]()
@@ -150,6 +153,15 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.tableView.reloadData()
             nextButton.isHidden = true
             prevButton.isHidden = true
+            
+            for v in defaults.dictionaryRepresentation().values {
+                print(JSON(v)["type"].description)
+                if JSON(v)["type"].description == "user"{
+                    favoriteUserIdArray.append(JSON(v)["id"].description)
+                    favoriteUserNameArray.append(JSON(v)["name"].description)
+                    favoriteUserUrlArray.append(JSON(v)["url"].description)
+                }
+            }
 
         }
         else{
@@ -219,7 +231,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if isFavoriteTab{
             print("tableView")
-            print(defaults.dictionaryRepresentation().values)
+            cell.label.text = favoriteUserNameArray[indexPath.row]
+            cell.userImage.downloadedFrom(link: favoriteUserUrlArray[indexPath.row])
+            cell.starImage.image = UIImage(named: "filled")
+            
             return cell
         }
         else{
@@ -238,7 +253,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFavoriteTab{
-            return userNameArray.count
+            return favoriteUserIdArray.count
         }
         else{
             return userNameArray.count
@@ -247,7 +262,12 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isFavoriteTab{
-            
+            self.tabBarController?.tabBar.isHidden = true
+            currentDetailIdGL = favoriteUserIdArray[indexPath.row]
+            currentUserNameGL = favoriteUserNameArray[indexPath.row]
+            currentUserProfileUrlGL = favoriteUserUrlArray[indexPath.row]
+            tabBarIndexGL = 0
+            currentType = "user"
         }
         else{
             self.tabBarController?.tabBar.isHidden = true

@@ -13,6 +13,9 @@ import SwiftSpinner
 
 class EventViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var favoriteUserIdArray = [String]()
+    var favoriteUserNameArray = [String]()
+    var favoriteUserUrlArray = [String]()
     var userIdArray = [String]()
     var userNameArray = [String]()
     var userUrlArray = [String]()
@@ -24,7 +27,8 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     var offSet = 0
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
-    
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var prevButton: UIButton!
     @IBAction func next(_ sender: Any) {
         if fromDetail{
             self.tabBarController?.selectedIndex = tabBarIndexGL
@@ -92,7 +96,6 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.offSet -= 10
             fromHome = false
             fromDetail = false
-            
             if self.offSet < 0{
                 self.offSet = 0
             }
@@ -143,53 +146,73 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.isHidden = false
-        if fromDetail{
-            self.tabBarController?.selectedIndex = tabBarIndexGL
+        print("page view!")
+        if isFavoriteTab{
+            navigationItem.title = "Favorites"
+            self.tableView.reloadData()
+            nextButton.isHidden = true
+            prevButton.isHidden = true
+            
+            for v in defaults.dictionaryRepresentation().values {
+                print(JSON(v)["type"].description)
+                if JSON(v)["type"].description == "event"{
+                    favoriteUserIdArray.append(JSON(v)["id"].description)
+                    favoriteUserNameArray.append(JSON(v)["name"].description)
+                    favoriteUserUrlArray.append(JSON(v)["url"].description)
+                }
+            }
+            
         }
         else{
-            self.tabBarController?.selectedIndex = 2
-        }
-        fromDetail = false
-        var searchUrl = url + "keyword=" + searchFieldGL + "&type=event&offset=" + "\(offSet)"
-        if fromHome{
-            currentUrlGL[2] = searchUrl
-        }
-        else{
-            searchUrl = currentUrlGL[2]
-        }
-        SwiftSpinner.show("Loading Data...")
-        Alamofire.request(searchUrl)
-            .responseJSON{ response in
-                if let json = response.result.value {
-                    
-                    let swiftyJsonVar = JSON(json)
-                    if let resData = swiftyJsonVar["data"].arrayObject {
-                        let userData = resData as! [[String:AnyObject]]
-                        for item in userData{
-                            self.userIdArray.append(String(item["id"] as! String))
-                            self.userNameArray.append(String(item["name"] as! String))
-                            for data in item["picture"] as! [String:AnyObject]{
-                                self.userUrlArray.append(String(data.value["url"] as! String))
+            self.tabBarController?.tabBar.isHidden = false
+            if fromDetail{
+                self.tabBarController?.selectedIndex = tabBarIndexGL
+            }
+            else{
+                self.tabBarController?.selectedIndex = 2
+            }
+            fromDetail = false
+            var searchUrl = url + "keyword=" + searchFieldGL + "&type=event&offset=" + "\(offSet)"
+            if fromHome{
+                currentUrlGL[2] = searchUrl
+            }
+            else{
+                searchUrl = currentUrlGL[2]
+            }
+            SwiftSpinner.show("Loading Data...")
+            Alamofire.request(searchUrl)
+                .responseJSON{ response in
+                    if let json = response.result.value {
+                        
+                        let swiftyJsonVar = JSON(json)
+                        if let resData = swiftyJsonVar["data"].arrayObject {
+                            let userData = resData as! [[String:AnyObject]]
+                            for item in userData{
+                                self.userIdArray.append(String(item["id"] as! String))
+                                self.userNameArray.append(String(item["name"] as! String))
+                                for data in item["picture"] as! [String:AnyObject]{
+                                    self.userUrlArray.append(String(data.value["url"] as! String))
+                                }
                             }
                         }
+                        if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
+                            self.nextUrlAvailable = true
+                        }
+                        else{
+                            self.nextUrlAvailable = false
+                        }
+                        if String(describing: swiftyJsonVar["paging"]["previous"]).characters.count > 0 {
+                            self.previousUrlAvailable = true
+                        }
+                        else{
+                            self.previousUrlAvailable = false
+                        }
                     }
-                    if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
-                        self.nextUrlAvailable = true
-                    }
-                    else{
-                        self.nextUrlAvailable = false
-                    }
-                    if String(describing: swiftyJsonVar["paging"]["previous"]).characters.count > 0 {
-                        self.previousUrlAvailable = true
-                    }
-                    else{
-                        self.previousUrlAvailable = false
-                    }
-                }
-                self.tableView.reloadData()
-                SwiftSpinner.hide()
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide()
+            }
         }
+        
         if revealViewController() != nil {
             btnMenuButton.target = revealViewController()
             btnMenuButton.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -204,30 +227,54 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! userCell
-        cell.label.text = userNameArray[indexPath.row]
-        cell.userImage.downloadedFrom(link: userUrlArray[indexPath.row])
         
-        if ((defaults.object(forKey: userIdArray[indexPath.row]) as? [String:String]) != nil){
+        if isFavoriteTab{
+            print("tableView")
+            cell.label.text = favoriteUserNameArray[indexPath.row]
+            cell.userImage.downloadedFrom(link: favoriteUserUrlArray[indexPath.row])
             cell.starImage.image = UIImage(named: "filled")
+            
+            return cell
         }
         else{
-            cell.starImage.image = UIImage(named: "empty")
+            cell.label.text = userNameArray[indexPath.row]
+            cell.userImage.downloadedFrom(link: userUrlArray[indexPath.row])
+            
+            if ((defaults.object(forKey: userIdArray[indexPath.row]) as? [String:String]) != nil){
+                cell.starImage.image = UIImage(named: "filled")
+            }
+            else{
+                cell.starImage.image = UIImage(named: "empty")
+            }
+            return cell
         }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(userNameArray)
-        return userNameArray.count
-        
+        if isFavoriteTab{
+            return favoriteUserIdArray.count
+        }
+        else{
+            return userNameArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tabBarController?.tabBar.isHidden = true
-        currentDetailIdGL = userIdArray[indexPath.row]
-        currentUserNameGL = userNameArray[indexPath.row]
-        currentUserProfileUrlGL = userUrlArray[indexPath.row]
-        print((self.tabBarController?.selectedIndex)!)
-        tabBarIndexGL = 2
+        if isFavoriteTab{
+            self.tabBarController?.tabBar.isHidden = true
+            currentDetailIdGL = favoriteUserIdArray[indexPath.row]
+            currentUserNameGL = favoriteUserNameArray[indexPath.row]
+            currentUserProfileUrlGL = favoriteUserUrlArray[indexPath.row]
+            tabBarIndexGL = 2
+            currentType = "event"
+        }
+        else{
+            self.tabBarController?.tabBar.isHidden = true
+            currentDetailIdGL = userIdArray[indexPath.row]
+            currentUserNameGL = userNameArray[indexPath.row]
+            currentUserProfileUrlGL = userUrlArray[indexPath.row]
+            tabBarIndexGL = 2
+            currentType = "event"
+        }
     }
 }

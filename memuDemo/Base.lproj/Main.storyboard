@@ -357,7 +357,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G4G-pC-tXI" id="cLN-TV-no2">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="111.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fD7-qQ-hEq">
@@ -445,7 +445,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="368"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KBu-d4-8X5" id="891-bD-p1b">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="367"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="368"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhY-di-GSl">
@@ -673,7 +673,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xut-ub-FFK" id="n4C-vj-jUd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnX-rA-kDc">
@@ -1307,6 +1307,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenuButton" destination="kmm-uM-ej8" id="wAD-0v-mLq"/>
+                        <outlet property="nextButton" destination="KXh-Kk-tgq" id="bjs-ve-8tr"/>
+                        <outlet property="prevButton" destination="duk-4P-sz4" id="6Hn-Iz-7wa"/>
                         <outlet property="tableView" destination="0xb-QE-Ags" id="LcQ-QX-Mma"/>
                     </connections>
                 </viewController>
@@ -1393,6 +1395,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenuButton" destination="OmP-jo-Z5z" id="Ib8-jy-GO7"/>
+                        <outlet property="nextButton" destination="8Db-gQ-fR5" id="RGd-av-nOy"/>
+                        <outlet property="prevButton" destination="Xsc-P8-hfl" id="SGM-ZW-y5D"/>
                         <outlet property="tableView" destination="DL0-uV-h4L" id="7Ko-4i-OmZ"/>
                     </connections>
                 </viewController>
@@ -1479,6 +1483,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenuButton" destination="ys4-Ix-cv2" id="SXX-r2-kh1"/>
+                        <outlet property="nextButton" destination="zZq-C1-G5H" id="ouF-U8-JN0"/>
+                        <outlet property="prevButton" destination="gvR-wX-UIM" id="BHo-PZ-WYs"/>
                         <outlet property="tableView" destination="nJx-RQ-ybb" id="4tG-NB-cN9"/>
                     </connections>
                 </viewController>
@@ -1565,6 +1571,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenuButton" destination="i8S-mc-tJo" id="tdh-qg-cjT"/>
+                        <outlet property="nextButton" destination="hzp-2E-7Gg" id="g4W-dB-o6A"/>
+                        <outlet property="prevButton" destination="HTY-yg-KSp" id="E65-I0-eJL"/>
                         <outlet property="tableView" destination="GdK-dY-oaZ" id="yIt-Rr-0gV"/>
                     </connections>
                 </viewController>
@@ -1588,6 +1596,6 @@
         <image name="users" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FcF-fS-hBb"/>
+        <segue reference="Mq6-u8-A2x"/>
     </inferredMetricsTieBreakers>
 </document>
