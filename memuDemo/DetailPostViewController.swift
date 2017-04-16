@@ -26,7 +26,7 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     @IBAction func showActionSheet(_ sender: Any) {
-        let dict:[String:String] = ["id":currentDetailIdGL,"name":currentUserNameGL,"url":currentUserProfileUrlGL]
+        let dict:[String:String] = ["id":currentDetailIdGL,"name":currentUserNameGL,"type":currentType, "url":currentUserProfileUrlGL]
         
         if ((defaults.object(forKey: currentDetailIdGL) as? [String:String]) != nil){
             favorite = true
@@ -86,8 +86,7 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
         tblTableView.rowHeight = UITableViewAutomaticDimension
         
         
-        let tmpId = "134972803193847"
-        //let detailUrl = url + "id=\(detailIdGL)"
+        
         let detailUrl = url + "id=\(currentDetailIdGL)"
         print(detailUrl)
         
@@ -97,33 +96,45 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
                 if let json = response.result.value {
                     
                     let swiftyJsonVar = JSON(json)
-                    let data = swiftyJsonVar["picture"]["data"]
-                    for (i, j): (String, JSON) in data{
-                        if i == "url"{
-                            self.detailProfileUrl = j.description
+                    if swiftyJsonVar["posts"].count > 0{
+                        let data = swiftyJsonVar["picture"]["data"]
+                        for (i, j): (String, JSON) in data{
+                            if i == "url"{
+                                self.detailProfileUrl = j.description
+                            }
                         }
-                    }
-                    for (_, subJson): (String, JSON) in swiftyJsonVar["posts"]["data"]{
-                        //detailPhotoTitleNameArray.append(String(subJson["name"].description as!)!);)
-                        print(subJson["message"].description)
-                        print(subJson["created_time"].description)
-                        self.detailContentArray.append(subJson["message"].description)
+                        for (_, subJson): (String, JSON) in swiftyJsonVar["posts"]["data"]{
+                            //detailPhotoTitleNameArray.append(String(subJson["name"].description as!)!);)
+                            print(subJson["message"].description)
+                            print(subJson["created_time"].description)
+                            self.detailContentArray.append(subJson["message"].description)
+                            
+                            
+                            let time = subJson["created_time"].description
+                            let time2 = time.replacingOccurrences(of: "T", with: " ")
+                            let time3 = time2.replacingOccurrences(of: "+", with: " ")
+                            let dateFormatter = DateFormatter()
+                            print(time3)
+                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss SSS"
+                            let fullDate = dateFormatter.date(from: time3)
+                            dateFormatter.dateFormat = "dd MMM yyyy HH:mm:ss"
+                            let time4 = dateFormatter.string(from: fullDate!)
+                            print(time4)
+                            self.detailTimeArray.append(time4)
+                        }
+                        print(self.detailContentArray)
+                        print(self.detailTimeArray)
                         
-                        
-                        let time = subJson["created_time"].description
-                        let time2 = time.replacingOccurrences(of: "T", with: " ")
-                        let time3 = time2.replacingOccurrences(of: "+", with: " ")
-                        let dateFormatter = DateFormatter()
-                        print(time3)
-                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss SSS"
-                        let fullDate = dateFormatter.date(from: time3)
-                        dateFormatter.dateFormat = "dd MMM yyyy HH:mm:ss"
-                        let time4 = dateFormatter.string(from: fullDate!)
-                        print(time4)
-                        self.detailTimeArray.append(time4)
                     }
-                    print(self.detailContentArray)
-                    print(self.detailTimeArray)
+                    else{
+                        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+                        label.center = CGPoint(x: 190, y: 285)
+                        label.textAlignment = .center
+                        label.text = "No contents"
+                        self.view.addSubview(label)
+                        self.tblTableView.isHidden = true
+                    }
+                    
                     
                 }
                 self.tblTableView.reloadData()

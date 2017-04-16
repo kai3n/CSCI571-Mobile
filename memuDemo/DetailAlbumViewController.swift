@@ -11,10 +11,9 @@ import Alamofire
 import SwiftyJSON
 import SwiftSpinner
 import EasyToast
-import Social
 import FacebookShare
-import FacebookLogin
-import FacebookCore
+import FBSDKShareKit
+import FBSDKLoginKit
 
 
 
@@ -22,6 +21,23 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
     var selectedIndexPath : IndexPath?
 
     @IBOutlet weak var tblTableView: UITableView!
+    
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        let alert = UIAlertController(title: "Not Posted", message: error.description, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(defaultAction)
+        
+    }
+    
+    func sharerDidCancel(_ sharer: FBSDKSharing!) {
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        let alert = UIAlertController(title: "Posted Successfully", message: "", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(defaultAction)
+        
+    }
     
     @IBAction func pressedBackbtn(_ sender: Any) {
         fromDetail = true
@@ -35,7 +51,7 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
     var favorite = false
     
     @IBAction func showActionSheet(_ sender: Any) {
-        let dict:[String:String] = ["id":currentDetailIdGL,"name":currentUserNameGL,"url":currentUserProfileUrlGL]
+        let dict:[String:String] = ["id":currentDetailIdGL,"name":currentUserNameGL,"type":currentType, "url":currentUserProfileUrlGL]
         
         if ((defaults.object(forKey: currentDetailIdGL) as? [String:String]) != nil){
             favorite = true
@@ -72,6 +88,7 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
         let share = UIAlertAction(title:"Share", style: .default) { (action) in
             
             print("share")
+            
 //            
             
         }
@@ -87,34 +104,12 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //test.text = detailIdGL
+        
         detailAlbumIdArray = [String]()
         detailPhotoTitleNameArray = [String]()
         detailAlbumUrlArray = [String]()
         tblTableView.register(UITableViewCell.self, forCellReuseIdentifier: "DetailAlbumCell")
         
-        
-        
-
-
-        
-
-        
-//        let optionBarButtonItem = UIBarButtonItem(image: UIImage(named:"options"), style: UIBarButtonItemStyle.plain, target:self, action: #selector(UserViewController.add))
-//        self.navigationItem.setRightBarButton(optionBarButtonItem, animated: true)
-        //self.navigationController?.navigationBar.backItem?.title = "zz"
-//        weak var weakSelf = self
-//        navigationItem.leftBarButtonItems = CustomBackButton.createWithText(text: "a", color: UIColor.blue, target: weakSelf, action: #selector(DetailAlbumViewController.tappedBackButton))
-
-//        let optionBarButtonItem = UIBarButtonItem(image: UIImage(named:"options"), style: UIBarButtonItemStyle.plain, target:self, action: #selector(DetailAlbumViewController.add))
-//        self.navigationItem.rightBarButtonItem = optionBarButtonItem
-        //self.navigationItem.hidesBackButton = true
-//        let backButton = UIBarButtonItem(image: UIImage(named:"back"),style: UIBarButtonItemStyle.plain, target:self, action: #selector(DetailAlbumViewController.back))
-//        self.navigationItem.leftBarButtonItem = backButton
-//        self.automaticallyAdjustsScrollViewInsets = true
-        
-        let tmpId = "134972803193847"
-        //let detailUrl = url + "id=\(detailIdGL)"
         let detailUrl = url + "id=\(currentDetailIdGL)"
         print(detailUrl)
         
@@ -124,17 +119,25 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
                 if let json = response.result.value {
                     
                     let swiftyJsonVar = JSON(json)
-                    for (_, subJson): (String, JSON) in swiftyJsonVar["albums"]["data"]{
-                        //detailPhotoTitleNameArray.append(String(subJson["name"].description as!)!);)
-                        self.detailPhotoTitleNameArray.append(subJson["name"].description)
-                        for (_, subJson2): (String, JSON) in subJson["photos"]["data"]{
-                            self.detailAlbumUrlArray.append(subJson2["picture"].description)
-                            self.detailAlbumIdArray.append(subJson2["id"].description)
-                            //print(subJson2["id"]) // for original picture
+                    if swiftyJsonVar["albums"].count > 0{
+                        for (_, subJson): (String, JSON) in swiftyJsonVar["albums"]["data"]{
+                            self.detailPhotoTitleNameArray.append(subJson["name"].description)
+                            for (_, subJson2): (String, JSON) in subJson["photos"]["data"]{
+                                self.detailAlbumUrlArray.append(subJson2["picture"].description)
+                                self.detailAlbumIdArray.append(subJson2["id"].description)
+                            }
                         }
-                        
-                        //print(subJson["name"]) // photo title
                     }
+                    else{
+                        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+                        label.center = CGPoint(x: 190, y: 285)
+                        label.textAlignment = .center
+                        label.text = "No contents"
+                        self.view.addSubview(label)
+                        self.tblTableView.isHidden = true
+                        
+                    }
+                    
                     print(self.detailPhotoTitleNameArray)
                     print(self.detailAlbumUrlArray)
                     print(self.detailAlbumIdArray)

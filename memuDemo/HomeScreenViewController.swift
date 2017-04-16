@@ -28,8 +28,15 @@ class HomeScreenViewController: UIViewController, CLLocationManagerDelegate{
         if searchField.text != ""{
             searchFieldGL = searchField.text!
             fromHome = true
+            isFavoriteTab = false
             tabBarIndexGL = 0
             // change the current view to the next view
+            
+            for v in defaults.dictionaryRepresentation().values {
+                if type(of: v) == _NSDictionary.Type.self{
+                    print(v)
+                }
+            }
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
             self.present(resultViewController, animated:false, completion:nil)
@@ -49,6 +56,7 @@ class HomeScreenViewController: UIViewController, CLLocationManagerDelegate{
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        
         // Do any additional setup after loading the view, typically from a nib.
         if revealViewController() != nil {
             //            revealViewController().rearViewRevealWidth = 62
@@ -66,6 +74,8 @@ class HomeScreenViewController: UIViewController, CLLocationManagerDelegate{
         let lastLocation: CLLocation = locations[locations.count - 1]
         latitude = String(format: "%.6f", lastLocation.coordinate.latitude)
         longitude = String(format: "%.6f", lastLocation.coordinate.longitude)
+        print(latitude)
+        print(longitude)
     }
     
     

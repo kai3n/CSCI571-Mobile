@@ -84,14 +84,10 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if cell.lblMenuname.text! == "Favorites"
         {
             print("favorites Tapped")
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController3")
-//            self.present(resultViewController, animated:false, completion:nil)
-            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController3") as! SWRevealViewController
-            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-            
-            revealviewcontroller?.pushFrontViewController(newFrontController, animated: true)
+            isFavoriteTab = true
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
+            self.present(resultViewController, animated:false, completion:nil)
         }
         if cell.lblMenuname.text! == "About me"
         {
