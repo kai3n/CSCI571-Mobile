@@ -17,7 +17,7 @@ import FBSDKLoginKit
 
 
 
-class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, FBSDKSharingDelegate  {
+class DetailAlbumViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, FBSDKSharingDelegate  {
     var selectedIndexPath : IndexPath?
 
     @IBOutlet weak var tblTableView: UITableView!
@@ -57,7 +57,9 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
 
     
     @IBAction func pressedBackbtn(_ sender: Any) {
-        fromDetail = true
+        
+        fromDetail[tabBarIndexGL] = true
+        print("pressedBackbtn \(tabBarIndexGL)")
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
         self.present(resultViewController, animated:false, completion:nil)   
@@ -117,7 +119,7 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
             dialog.fromViewController = self
             dialog.shareContent = content
             dialog.delegate = self as! FBSDKSharingDelegate
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.feedBrowser
             
             if !dialog.canShow() {
                 dialog.mode = FBSDKShareDialogMode.automatic
@@ -201,8 +203,12 @@ class DetailAlbumViewController: UIViewController,UITableViewDelegate,UITableVie
         print(3)
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailAlbumCell
         cell.title.text = detailPhotoTitleNameArray[indexPath.row]
-        cell.photo1.downloadedFrom(link: detailAlbumUrlArray[indexPath.row*2])
-        cell.photo2.downloadedFrom(link: detailAlbumUrlArray[indexPath.row*2+1])
+        if indexPath.row*2 < detailAlbumUrlArray.count{
+            cell.photo1.downloadedFrom(link: detailAlbumUrlArray[indexPath.row*2])
+        }
+        if indexPath.row*2+1 < detailAlbumUrlArray.count{
+            cell.photo2.downloadedFrom(link: detailAlbumUrlArray[indexPath.row*2+1])
+        }
         return cell
     }
     

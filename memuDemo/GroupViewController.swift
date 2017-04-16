@@ -31,13 +31,13 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
     @IBAction func next(_ sender: Any) {
-        if fromDetail{
-            self.tabBarController?.selectedIndex = tabBarIndexGL
-        }
-        else{
-            self.tabBarController?.selectedIndex = 4
-        }
         if nextUrlAvailable {
+            if fromDetail[4]{
+                self.tabBarController?.selectedIndex = tabBarIndexGL
+            }
+            else{
+                self.tabBarController?.selectedIndex = 4
+            }
             self.userIdArray = [String]()
             self.userNameArray = [String]()
             self.userUrlArray = [String]()
@@ -45,7 +45,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.starIconArray = [UIImage]()
             self.offSet += 10
             fromHome = false
-            fromDetail = false
+            fromDetail[4] = false
             let searchUrl = url + "keyword=" + searchFieldGL + "&type=group&offset=" + "\(offSet)"
             currentUrlGL[4] = searchUrl
             
@@ -87,7 +87,12 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     @IBAction func previous(_ sender: Any) {
-        
+        if fromDetail[4]{
+            self.tabBarController?.selectedIndex = tabBarIndexGL
+        }
+        else{
+            self.tabBarController?.selectedIndex = 4
+        }
         if previousUrlAvailable {
             self.userIdArray = [String]()
             self.userNameArray = [String]()
@@ -96,7 +101,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.starIconArray = [UIImage]()
             self.offSet -= 10
             fromHome = false
-            fromDetail = false
+            fromDetail[4] = false
             if self.offSet < 0{
                 self.offSet = 0
             }
@@ -165,20 +170,24 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         else{
+            var searchUrl = ""
             self.tabBarController?.tabBar.isHidden = false
-            if fromDetail{
+            if fromDetail[4]{
                 self.tabBarController?.selectedIndex = tabBarIndexGL
-            }
-            else{
-                self.tabBarController?.selectedIndex = 4
-            }
-            fromDetail = false
-            var searchUrl = url + "keyword=" + searchFieldGL + "&type=group&offset=" + "\(offSet)"
-            if fromHome{
-                currentUrlGL[4] = searchUrl
-            }
-            else{
+                fromDetail[4] = false
                 searchUrl = currentUrlGL[4]
+            }
+            else{
+                //self.tabBarController?.selectedIndex = tabBarIndexGL
+                searchUrl = url + "keyword=" + searchFieldGL + "&type=group&offset=" + "\(offSet)"
+                if fromHome{
+                    currentUrlGL[4] = searchUrl
+                }
+                else{
+                    if currentUrlGL[4] == nil{
+                        searchUrl = currentUrlGL[4]
+                    }
+                }
             }
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)

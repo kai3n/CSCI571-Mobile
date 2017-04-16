@@ -10,16 +10,52 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SwiftSpinner
+import EasyToast
+import FacebookShare
+import FBSDKShareKit
+import FBSDKLoginKit
 
-class DetailPostViewController: UIViewController,UITableViewDelegate,UITableViewDataSource  {
+class DetailPostViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, FBSDKSharingDelegate  {
 
     var detailProfileUrl:String = ""
     var detailContentArray = [String]()
     var detailTimeArray = [String]()
     var favorite = false
     
+    /**
+     Sent to the delegate when the share completes without error or cancellation.
+     - Parameter sharer: The FBSDKSharing that completed.
+     - Parameter results: The results from the sharer.  This may be nil or empty.
+     */
+    public func sharer(_ sharer: FBSDKSharing!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        print("success")
+        self.view.showToast("Shared!", position: .bottom, popTime: 2, dismissOnTap: false)
+    }
+    
+    
+    /**
+     Sent to the delegate when the sharer encounters an error.
+     - Parameter sharer: The FBSDKSharing that completed.
+     - Parameter error: The error.
+     */
+    public func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
+        print("Error")
+        self.view.showToast("Error!", position: .bottom, popTime: 2, dismissOnTap: false)
+    }
+    
+    
+    /**
+     Sent to the delegate when the sharer is cancelled.
+     - Parameter sharer: The FBSDKSharing that completed.
+     */
+    public func sharerDidCancel(_ sharer: FBSDKSharing) {
+        print("cancelled")
+        self.view.showToast("Cancelled!", position: .bottom, popTime: 2, dismissOnTap: false)
+    }
+
+    
     @IBAction func pressedBackbtn(_ sender: Any) {
-        fromDetail = true
+        fromDetail[tabBarIndexGL] = true
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SWRevealViewController2")
         self.present(resultViewController, animated:false, completion:nil)
@@ -63,6 +99,24 @@ class DetailPostViewController: UIViewController,UITableViewDelegate,UITableView
         let share = UIAlertAction(title:"Share", style: .default) { (action) in
             
             print("share")
+            let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+            
+            content.contentURL = NSURL(string:"https://www.facebook.com/\(currentDetailIdGL)")! as URL
+            content.contentTitle = currentUserNameGL
+            content.contentDescription = "This is awesome!"
+            content.imageURL = NSURL(string: currentUserProfileUrlGL)! as URL
+            
+            
+            let dialog : FBSDKShareDialog = FBSDKShareDialog()
+            dialog.fromViewController = self
+            dialog.shareContent = content
+            dialog.delegate = self as! FBSDKSharingDelegate
+            dialog.mode = FBSDKShareDialogMode.feedBrowser
+            
+            if !dialog.canShow() {
+                dialog.mode = FBSDKShareDialogMode.automatic
+            }
+            dialog.show()
             //
             
         }

@@ -24,18 +24,18 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
     var currentRow:Int!
     var nextUrlAvailable = Bool()
     var previousUrlAvailable = Bool()
-    var offSet = 0
+    var offSet = ""
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
     @IBAction func next(_ sender: Any) {
-        if fromDetail{
+        if fromDetail[3]{
             self.tabBarController?.selectedIndex = tabBarIndexGL
         }
         else{
-            self.tabBarController?.selectedIndex = 4
+            self.tabBarController?.selectedIndex = 3
         }
         if nextUrlAvailable {
             self.userIdArray = [String]()
@@ -43,9 +43,8 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.userUrlArray = [String]()
             self.userIconArray = [UIImage]()
             self.starIconArray = [UIImage]()
-            self.offSet += 10
             fromHome = false
-            fromDetail = false
+            fromDetail[3] = false
             let searchUrl = url + "keyword=" + searchFieldGL + "&type=place&offset=\(offSet)&latitude=\(latitude)&longitude=\(longitude)"
             currentUrlGL[3] = searchUrl
             
@@ -64,7 +63,8 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 }
                             }
                         }
-                        if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
+                        if swiftyJsonVar["paging"]["cursors"] != nil {
+                            self.offSet = swiftyJsonVar["paging"]["cursors"]["after"].description
                             self.nextUrlAvailable = true
                         }
                         else{
@@ -87,19 +87,22 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     @IBAction func previous(_ sender: Any) {
-        
+        if fromDetail[3]{
+            self.tabBarController?.selectedIndex = tabBarIndexGL
+        }
+        else{
+            self.tabBarController?.selectedIndex = 3
+        }
         if previousUrlAvailable {
             self.userIdArray = [String]()
             self.userNameArray = [String]()
             self.userUrlArray = [String]()
             self.userIconArray = [UIImage]()
             self.starIconArray = [UIImage]()
-            self.offSet -= 10
+            
             fromHome = false
-            fromDetail = false
-            if self.offSet < 0{
-                self.offSet = 0
-            }
+            fromDetail[3] = false
+            
             
             let searchUrl = url + "keyword=" + searchFieldGL + "&type=place&offset=\(offSet)&latitude=\(latitude)&longitude=\(longitude)"
             currentUrlGL[3] = searchUrl
@@ -119,6 +122,7 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 }
                             }
                         }
+                        
                         if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
                             self.nextUrlAvailable = true
                         }
@@ -147,7 +151,7 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("group view!")
+        print("place view!")
         if isFavoriteTab{
             navigationItem.title = "Favorites"
             self.tableView.reloadData()
@@ -165,20 +169,27 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         else{
+            
+            var searchUrl = ""
+            prevButton.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
-            if fromDetail{
+            if fromDetail[3]{
                 self.tabBarController?.selectedIndex = tabBarIndexGL
-            }
-            else{
-                self.tabBarController?.selectedIndex = 3
-            }
-            fromDetail = false
-            var searchUrl = url + "keyword=" + searchFieldGL + "&type=place&offset=\(offSet)&latitude=\(latitude)&longitude=\(longitude)"
-            if fromHome{
-                currentUrlGL[3] = searchUrl
-            }
-            else{
+                fromDetail[3] = false
                 searchUrl = currentUrlGL[3]
+                print(searchUrl)
+            }
+            else{
+                //self.tabBarController?.selectedIndex = tabBarIndexGL
+                searchUrl = url + "keyword=" + searchFieldGL + "&type=place&offset=\(offSet)&latitude=\(latitude)&longitude=\(longitude)"
+                if fromHome{
+                    currentUrlGL[3] = searchUrl
+                }
+                else{
+                    if currentUrlGL[3] == nil{
+                        searchUrl = currentUrlGL[3]
+                    }
+                }
             }
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)
@@ -196,8 +207,11 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 }
                             }
                         }
-                        if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
+                        
+                        //print(swiftyJsonVar["paging"]["cursors"]["after"].description)
+                        if swiftyJsonVar["paging"]["cursors"] != nil {
                             self.nextUrlAvailable = true
+                            self.offSet = swiftyJsonVar["paging"]["cursors"]["after"].description
                         }
                         else{
                             self.nextUrlAvailable = false

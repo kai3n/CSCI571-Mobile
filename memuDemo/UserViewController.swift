@@ -27,11 +27,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var offSet = 0
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
-
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
     @IBAction func next(_ sender: Any) {
-        if fromDetail{
+        if fromDetail[0]{
             self.tabBarController?.selectedIndex = tabBarIndexGL
         }
         else{
@@ -45,7 +44,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.starIconArray = [UIImage]()
             self.offSet += 10
             fromHome = false
-            fromDetail = false
+            fromDetail[0] = false
             let searchUrl = url + "keyword=" + searchFieldGL + "&type=user&offset=" + "\(offSet)"
             currentUrlGL[0] = searchUrl
             
@@ -87,7 +86,12 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     @IBAction func previous(_ sender: Any) {
-        
+        if fromDetail[0]{
+            self.tabBarController?.selectedIndex = tabBarIndexGL
+        }
+        else{
+            self.tabBarController?.selectedIndex = 0
+        }
         if previousUrlAvailable {
             self.userIdArray = [String]()
             self.userNameArray = [String]()
@@ -96,7 +100,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.starIconArray = [UIImage]()
             self.offSet -= 10
             fromHome = false
-            fromDetail = false
+            fromDetail[0] = false
             if self.offSet < 0{
                 self.offSet = 0
             }
@@ -165,21 +169,32 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         }
         else{
+            
+            var searchUrl = ""
             self.tabBarController?.tabBar.isHidden = false
-            if fromDetail{
+            if fromDetail[0]{
                 self.tabBarController?.selectedIndex = tabBarIndexGL
-            }
-            else{
-                self.tabBarController?.selectedIndex = 0
-            }
-            fromDetail = false
-            var searchUrl = url + "keyword=" + searchFieldGL + "&type=user&offset=" + "\(offSet)"
-            if fromHome{
-                currentUrlGL[0] = searchUrl
-            }
-            else{
+                fromDetail[0] = false
                 searchUrl = currentUrlGL[0]
             }
+            else{
+                if tabBarIndexGL != 0{
+                    self.tabBarController?.selectedIndex = tabBarIndexGL
+                }
+                else{
+                    self.tabBarController?.selectedIndex = 0
+                }
+                searchUrl = url + "keyword=" + searchFieldGL + "&type=user&offset=" + "\(offSet)"
+                if fromHome{
+                    currentUrlGL[0] = searchUrl
+                }
+                else{
+                    if currentUrlGL[0] == nil{
+                        searchUrl = currentUrlGL[0]
+                    }
+                }
+            }
+            print(searchUrl)
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)
                 .responseJSON{ response in

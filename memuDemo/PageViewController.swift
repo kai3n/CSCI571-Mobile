@@ -31,11 +31,11 @@ class PageViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
     @IBAction func next(_ sender: Any) {
-        if fromDetail{
+        if fromDetail[1]{
             self.tabBarController?.selectedIndex = tabBarIndexGL
         }
         else{
-            self.tabBarController?.selectedIndex = 0
+            self.tabBarController?.selectedIndex = 1
         }
         if nextUrlAvailable {
             self.userIdArray = [String]()
@@ -45,10 +45,10 @@ class PageViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.starIconArray = [UIImage]()
             self.offSet += 10
             fromHome = false
-            fromDetail = false
+            fromDetail[1] = false
             let searchUrl = url + "keyword=" + searchFieldGL + "&type=page&offset=" + "\(offSet)"
             currentUrlGL[1] = searchUrl
-            
+            print(searchUrl)
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)
                 .responseJSON{ response in
@@ -87,7 +87,12 @@ class PageViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     @IBAction func previous(_ sender: Any) {
-        
+        if fromDetail[1]{
+            self.tabBarController?.selectedIndex = tabBarIndexGL
+        }
+        else{
+            self.tabBarController?.selectedIndex = 1
+        }
         if previousUrlAvailable {
             self.userIdArray = [String]()
             self.userNameArray = [String]()
@@ -96,7 +101,7 @@ class PageViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.starIconArray = [UIImage]()
             self.offSet -= 10
             fromHome = false
-            fromDetail = false
+            fromDetail[1] = false
             if self.offSet < 0{
                 self.offSet = 0
             }
@@ -165,21 +170,28 @@ class PageViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
         }
         else{
+            var searchUrl = ""
             self.tabBarController?.tabBar.isHidden = false
-            if fromDetail{
+            if fromDetail[1]{
                 self.tabBarController?.selectedIndex = tabBarIndexGL
-            }
-            else{
-                self.tabBarController?.selectedIndex = 1
-            }
-            fromDetail = false
-            var searchUrl = url + "keyword=" + searchFieldGL + "&type=page&offset=" + "\(offSet)"
-            if fromHome{
-                currentUrlGL[1] = searchUrl
-            }
-            else{
+                fromDetail[1] = false
                 searchUrl = currentUrlGL[1]
+                print(searchUrl)
             }
+            else{
+                //self.tabBarController?.selectedIndex = tabBarIndexGL
+                searchUrl = url + "keyword=" + searchFieldGL + "&type=page&offset=" + "\(offSet)"
+                if fromHome{
+                    currentUrlGL[1] = searchUrl
+                }
+                else{
+                    if currentUrlGL[1] == nil{
+                        searchUrl = currentUrlGL[1]
+                    }
+                }
+            }
+            
+            print(searchUrl)
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)
                 .responseJSON{ response in

@@ -30,7 +30,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
     @IBAction func next(_ sender: Any) {
-        if fromDetail{
+        if fromDetail[2]{
             self.tabBarController?.selectedIndex = tabBarIndexGL
         }
         else{
@@ -44,7 +44,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.starIconArray = [UIImage]()
             self.offSet += 10
             fromHome = false
-            fromDetail = false
+            fromDetail[2] = false
             let searchUrl = url + "keyword=" + searchFieldGL + "&type=event&offset=" + "\(offSet)"
             currentUrlGL[2] = searchUrl
             
@@ -86,7 +86,12 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     @IBAction func previous(_ sender: Any) {
-        
+        if fromDetail[2]{
+            self.tabBarController?.selectedIndex = tabBarIndexGL
+        }
+        else{
+            self.tabBarController?.selectedIndex = 2
+        }
         if previousUrlAvailable {
             self.userIdArray = [String]()
             self.userNameArray = [String]()
@@ -95,7 +100,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.starIconArray = [UIImage]()
             self.offSet -= 10
             fromHome = false
-            fromDetail = false
+            fromDetail[2] = false
             if self.offSet < 0{
                 self.offSet = 0
             }
@@ -146,7 +151,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("page view!")
+        print("event view!")
         if isFavoriteTab{
             navigationItem.title = "Favorites"
             self.tableView.reloadData()
@@ -164,20 +169,24 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         else{
+            var searchUrl = ""
             self.tabBarController?.tabBar.isHidden = false
-            if fromDetail{
+            if fromDetail[2]{
                 self.tabBarController?.selectedIndex = tabBarIndexGL
-            }
-            else{
-                self.tabBarController?.selectedIndex = 2
-            }
-            fromDetail = false
-            var searchUrl = url + "keyword=" + searchFieldGL + "&type=event&offset=" + "\(offSet)"
-            if fromHome{
-                currentUrlGL[2] = searchUrl
-            }
-            else{
+                fromDetail[2] = false
                 searchUrl = currentUrlGL[2]
+            }
+            else{
+                //self.tabBarController?.selectedIndex = tabBarIndexGL
+                searchUrl = url + "keyword=" + searchFieldGL + "&type=event&offset=" + "\(offSet)"
+                if fromHome{
+                    currentUrlGL[2] = searchUrl
+                }
+                else{
+                    if currentUrlGL[2] == nil{
+                        searchUrl = currentUrlGL[2]
+                    }
+                }
             }
             SwiftSpinner.show("Loading Data...")
             Alamofire.request(searchUrl)
