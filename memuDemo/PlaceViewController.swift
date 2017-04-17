@@ -66,9 +66,11 @@ class PlaceViewController: UIViewController, UITableViewDataSource, UITableViewD
                         if swiftyJsonVar["paging"]["cursors"] != nil {
                             self.offSet = swiftyJsonVar["paging"]["cursors"]["after"].description
                             self.nextUrlAvailable = true
+                            self.nextButton.isHidden = false
                         }
                         else{
                             self.nextUrlAvailable = false
+                            self.nextButton.isHidden = true
                         }
                         if String(describing: swiftyJsonVar["paging"]["previous"]).characters.count > 0 {
                             self.previousUrlAvailable = true

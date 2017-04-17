@@ -64,17 +64,21 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 }
                             }
                         }
-                        if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
+                        if swiftyJsonVar["paging"]["next"] != nil {
                             self.nextUrlAvailable = true
+                            self.nextButton.isHidden = false
                         }
                         else{
                             self.nextUrlAvailable = false
+                            self.nextButton.isHidden = true
                         }
-                        if String(describing: swiftyJsonVar["paging"]["previous"]).characters.count > 0 {
+                        if swiftyJsonVar["paging"]["previous"] != nil {
                             self.previousUrlAvailable = true
+                            self.prevButton.isHidden = false
                         }
                         else{
                             self.previousUrlAvailable = false
+                            self.prevButton.isHidden = true
                         }
                     }
                     self.tableView.reloadData()
@@ -124,17 +128,21 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 }
                             }
                         }
-                        if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
+                        if swiftyJsonVar["paging"]["next"] != nil {
                             self.nextUrlAvailable = true
+                            self.nextButton.isHidden = false
                         }
                         else{
                             self.nextUrlAvailable = false
+                            self.nextButton.isHidden = true
                         }
-                        if String(describing: swiftyJsonVar["paging"]["previous"]).characters.count > 0 {
+                        if swiftyJsonVar["paging"]["previous"] != nil {
                             self.previousUrlAvailable = true
+                            self.prevButton.isHidden = false
                         }
                         else{
                             self.previousUrlAvailable = false
+                            self.prevButton.isHidden = true
                         }
                     }
                     self.tableView.reloadData()
@@ -205,17 +213,21 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 }
                             }
                         }
-                        if String(describing: swiftyJsonVar["paging"]["next"]).characters.count > 0 {
+                        if swiftyJsonVar["paging"]["next"] != nil {
                             self.nextUrlAvailable = true
+                            self.nextButton.isHidden = false
                         }
                         else{
                             self.nextUrlAvailable = false
+                            self.nextButton.isHidden = true
                         }
-                        if String(describing: swiftyJsonVar["paging"]["previous"]).characters.count > 0 {
+                        if swiftyJsonVar["paging"]["previous"] != nil {
                             self.previousUrlAvailable = true
+                            self.prevButton.isHidden = false
                         }
                         else{
                             self.previousUrlAvailable = false
+                            self.prevButton.isHidden = true
                         }
                     }
                     self.tableView.reloadData()
